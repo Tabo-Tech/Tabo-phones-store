@@ -1,2 +1,2 @@
 
-web: gunicorn tabostore.wsgi
+web: gunicorn Tabostore.wsgi
