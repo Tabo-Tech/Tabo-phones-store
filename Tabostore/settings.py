@@ -11,7 +11,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security settings
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-8$tsy*ku)05(t!-!*t*hs+3&6zu(t0hpajbwg^pz@say#yiiz$')
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,enigmatic-lake-20995-504fc1b6324f.herokuapp.com").split(",")
+ALLOWED_HOSTS = ['enigmatic-lake-20995-504fc1b6324f.herokuapp.com', '127.0.0.1']
+
 
 # Database Configuration
 DATABASE_URL = os.getenv("DATABASE_URL")
