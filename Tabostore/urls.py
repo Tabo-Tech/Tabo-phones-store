@@ -23,7 +23,7 @@ from products import views  # Hakikisha views zako zipo
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('products/', views.product_list, name='product_list'),  # Route ya kuonyesha bidhaa
-    curl -X GET https://enigmatic-lake-20995-504fc1b6324f.herokuapp.com/products/
+   # curl -X GET https://enigmatic-lake-20995-504fc1b6324f.herokuapp.com/products/
 
 ]
 
