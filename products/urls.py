@@ -6,6 +6,7 @@ from products import views  # Hakikisha views zako zipo
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+     path("", views.home, name="home"),
     path('products/', views.product_list, name='product_list'),  # Route ya kuonyesha bidhaa
 ]
 
