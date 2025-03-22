@@ -1,11 +1,24 @@
-from django.shortcuts import render
-from django.views.decorators.http import require_http_methods
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from .models import Product
 
-@require_http_methods(["GET", "POST"])  # Inaruhusu GET na POST
+@csrf_exempt  # Inaruhusu requests hata kama hazina CSRF token
 def product_list(request):
-    if request.method == "POST":
-        # Fanya kitu na POST data hapa (kama ku-filter bidhaa)
-        pass
-    products = Product.objects.all()
-    return render(request, 'products/product_list.html', {'products': products})
+    if request.method == "GET":
+        products = list(Product.objects.values())  # Rudisha data kama JSON
+        return JsonResponse({'products': products}, safe=False)
+
+    elif request.method == "POST":
+        return JsonResponse({"message": "Product created"}, status=201)
+
+    return JsonResponse({"error": "Method Not Allowed"}, status=405)
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Welcome to Tabostore!")  # Au unaweza kuredirect kwenye 'products/'
+
+urlpatterns = [
+    path("", home, name="home"),  # Hii inahakikisha root URL inafanya kazi
+    path("admin/", admin.site.urls),
+    path("products/", views.product_list, name="product_list"),
+]

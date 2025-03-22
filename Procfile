@@ -1,2 +1,3 @@
 
-web: gunicorn Tabostore.wsgi
+web: gunicorn Tabostore.wsgi --log-file -
+
