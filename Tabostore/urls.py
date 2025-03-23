@@ -16,17 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
-from products import views  # Hakikisha views zako zipo
+from products import views  # Ensure your views are imported
+from products.views import product_list, home  # Hakikisha ume-import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('products/', views.product_list, name='product_list'),  # Route ya kuonyesha bidhaa
-   # curl -X GET https://enigmatic-lake-20995-504fc1b6324f.herokuapp.com/products/
-
+    path("admin/", admin.site.urls),
+    path("", home, name="home"),  # Root URL ili ifanye kazi
+    path("products/", product_list, name="product_list"),  # API endpoint ya products
+     path('products/', include('products.urls')),  # Tumia 'include' kuingiza urls za 'products'
 ]
 
-# Ruhusu Django kuhudumia picha kwenye mode ya development
+
+# Allow Django to serve media files in development mode
+from django.conf import settings
+from django.conf.urls.static import static
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
